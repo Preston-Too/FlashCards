@@ -3,6 +3,14 @@ from django.contrib.auth.decorators import login_required
 from .forms import *
 
 # Create your views here.
+@login_required(login_url='/accounts/login/')
+def home(request):
+    subjects = Subjects.objects.all()
+    context = {
+    "subjects":subjects,
+    }
+    return render(request, 'index.html', locals())
+
 def registration(request):
     if request.method == 'POST':
         form = RegisterForm(request.POST)
@@ -20,7 +28,7 @@ def registration(request):
 
 @login_required(login_url='/accounts/login/')
 def profile(request):
-    projects = Projects.objects.all()
+    subjects = Subjects.objects.all()
     posts = Profile.objects.all()
     if request.method == 'POST':
         user_form = UserUpdateForm(request.POST, instance=request.user)
@@ -38,13 +46,13 @@ def profile(request):
     'user_form':user_form,
     'profile_form':profile_form,
     'posts':posts,
-    'projects':projects,
+    'subjects':subjects,
     }
     return render(request, 'profile/profile.html', context)
 
 @login_required(login_url='/accounts/login/')
 def updateprofile(request):
-    projects = Projects.objects.all()
+    subjects = Subjects.objects.all()
     posts = Profile.objects.all()
     if request.method == 'POST':
         user_form = UserUpdateForm(request.POST, instance=request.user)
@@ -62,7 +70,8 @@ def updateprofile(request):
     'user_form':user_form,
     'profile_form':profile_form,
     'posts':posts,
-    'projects':projects,
+    'subjects':subjects,
     }
 
     return render(request, 'profile/update_profile.html', context)
+
