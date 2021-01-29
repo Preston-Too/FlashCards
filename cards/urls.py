@@ -17,8 +17,6 @@ urlpatterns = [
     path('subject/<id>', views.get_subject, name='subject'),
     path('search/', views.search_subjects, name='search_subjects'),
 
-  
-
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

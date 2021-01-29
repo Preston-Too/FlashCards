@@ -40,6 +40,7 @@ class Subjects(models.Model):
     created_date = models.DateTimeField(default=timezone.now)
     title = models.CharField(max_length=255)
     author_profile = models.ForeignKey(Profile, on_delete=models.CASCADE, default='1', blank = True)
+
     def save_subject(self):
         self.save()
     def __str__(self):
@@ -53,6 +54,7 @@ class Subjects(models.Model):
     def search_subjects(cls,search_term):
         subject = cls.objects.filter(title__icontains=search_term)
         return subject
+
     @classmethod
     def get_subject(cls,id):
         try:

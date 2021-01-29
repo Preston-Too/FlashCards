@@ -1,5 +1,6 @@
 {% extends 'base.html'%}
 {% load bootstrap4 %}
+
 {% block content %}
   <div class="container">
     <div class="row">
@@ -11,14 +12,18 @@
               <form class="text-dark"  method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 {% bootstrap_form form %}
+
                 <div class="form-group">
                   <input type="submit" class="btn btn-primary"  value="SUBMIT">
                 </div>
               </form>
+<
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+
 {% endblock %}
+
