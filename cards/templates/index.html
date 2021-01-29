@@ -38,6 +38,8 @@
                         Posted By {{subject.author}} <br>
                           <span class="ml-2 dark-text">On: {{subject.created_date}}</span></span>
                       </div>
+                      <a class="btn btn-primary btn-sm mt-1 mb-sm" href="{% url 'update' subject.id%}">Update</a>
+                      <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'delete'  subject.id%}">Delete</a>
                     </div>
                   </div>
             </div>

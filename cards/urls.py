@@ -4,6 +4,8 @@ from django.conf import settings
 from django.conf.urls.static import static
 from . import views
 from django.contrib.auth.views import LoginView, LogoutView 
+from .views import (PostListView,
+    PostCreateView, PostUpdateView, PostDeleteView,)
 
 
 urlpatterns = [
@@ -16,6 +18,8 @@ urlpatterns = [
     path('new-subject/', views.postsubject, name='newsubject'),
     path('subject/<id>', views.get_subject, name='subject'),
     path('search/', views.search_subjects, name='search_subjects'),
+    path('post/<int:pk>/update/',PostUpdateView.as_view(), name="update"),
+    path('post/<int:pk>/delete/',PostDeleteView.as_view(), name="delete"),
 
 ]
 if settings.DEBUG:
