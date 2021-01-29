@@ -13,6 +13,10 @@ urlpatterns = [
     path('logout/', auth_views.LogoutView.as_view(template_name='registration/logout.html'), name='logout'),
     path('accounts/profile/', views.profile, name='profile'),
     path('updateprofile/', views.updateprofile, name='updateprofile'),
+    path('new-subject/', views.postsubject, name='newsubject'),
+    path('subject/<id>', views.get_subject, name='subject'),
+    path('search/', views.search_subjects, name='search_subjects'),
+
   
 
 ]
