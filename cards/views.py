@@ -3,6 +3,8 @@ from django.contrib.auth.decorators import login_required
 from .forms import *
 from .models import *
 from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.views.generic import CreateView, ListView,DetailView,UpdateView,DeleteView
 
 # Create your views here.
 @login_required(login_url='/accounts/login/')
@@ -110,3 +112,36 @@ def search_subjects(request):
     else:
         message = "You haven't searched for any user"
         return render(request, 'search.html', {"message":message})
+
+
+
+class PostCreateView(LoginRequiredMixin,CreateView):
+    model = Subjects
+    fields = ['title', 'description', 'created_date']
+    template_name = 'PostSubject.html'
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+# <app>/<model>_<viewtype>.html
+class PostListView(ListView):
+    model = Subjects   
+    template_name = 'index.html'   
+    context_object_name = 'subjects'
+    ordering = ['-pub_date']
+class PostCreateView(CreateView):
+    model = Subjects
+    template_name = 'PostSubject.html'   
+    fields= ['title', 'description','created_date']    
+class PostUpdateView(UpdateView):
+    model = Subjects
+    template_name = 'PostSubject.html'   
+    fields= ['title', 'description','created_date']    
+class PostDeleteView(DeleteView):
+    model = Subjects
+    template_name = 'delete.html'
+    success_url = ('/')
+def deleteForm(request):
+    context ={     
+    }
+    return render(request ,'delete.html', context )    
+
