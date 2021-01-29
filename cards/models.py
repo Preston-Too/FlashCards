@@ -43,17 +43,13 @@ class Subjects(models.Model):
 
     def save_subject(self):
         self.save()
-
     def __str__(self):
         return f'{self.author} Post'
-
     class Meta:
         db_table = 'subject'
         ordering = ['-created_date']
-
     def delete_subject(self):
         self.delete()
-
     @classmethod
     def search_subjects(cls,search_term):
         subject = cls.objects.filter(title__icontains=search_term)
