@@ -1,6 +1,8 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth.decorators import login_required
 from .forms import *
+from .models import *
+from django.contrib import messages
 
 # Create your views here.
 @login_required(login_url='/accounts/login/')
@@ -75,3 +77,40 @@ def updateprofile(request):
 
     return render(request, 'profile/update_profile.html', context)
 
+
+
+@login_required(login_url='/accounts/login/')
+def postsubject(request):
+    current_user = request.user
+    if request.method == 'POST':
+        form = SubjectForm(request.POST, request.FILES)
+        if form.is_valid():
+            subject = form.save(commit=False)
+            subject.author = current_user
+            subject.save()
+        return redirect('/')
+    else:
+        form = SubjectForm()
+    context = {
+        'form':form,
+    }
+    return render(request, 'PostSubject.html', context)
+
+@login_required(login_url='/accounts/login/')
+def get_subject(request, id):
+    subject = Subjects.objects.get(pk=id)
+
+    return render(request, 'subject.html', {'subject':subject})
+
+@login_required(login_url='/accounts/login/')
+def search_subjects(request):
+    if 'subject' in request.GET and request.GET['subject']:
+        search_term = request.GET["subject"]
+        searched_subjects = Subjects.search_subjects(search_term)
+        message = f"{search_term}"
+        
+        return render(request, 'search.html', {"message":message, "subjects": searched_subjects})
+    else:
+        message = "You haven't searched for any user"
+
+        return render(request, 'search.html', {"message":message})

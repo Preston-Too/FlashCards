@@ -33,12 +33,11 @@
 
                     <div class="card">
                     <div class="view overlay zoom">
-                        <img class="card-img-top" src="{{subject.image.url}}" alt="{{ subject.subject_name }}" width="200px" height="200px">
-                        </a>
+                        <h4 class="text-center"> {{ subject.title }}</h4>
                       </div>
 
                       <div class="card-body">
-                        <h4 class="card-title"> {{ subject.title }}</h4>
+                        <h5 class="card-title"> {{ subject.description }}</h5>
                         <a  class="btn btn-outline-info" href="/subject/{{subject.id}}">View details</a>
                       </div>
                       <div class="card-footer">
