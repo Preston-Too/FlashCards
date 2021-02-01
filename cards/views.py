@@ -114,14 +114,6 @@ def search_subjects(request):
         return render(request, 'search.html', {"message":message})
 
 
-
-class PostCreateView(LoginRequiredMixin,CreateView):
-    model = Subjects
-    fields = ['title', 'description', 'created_date']
-    template_name = 'PostSubject.html'
-    def form_valid(self, form):
-        form.instance.user = self.request.user
-        return super().form_valid(form)
 # <app>/<model>_<viewtype>.html
 class PostListView(ListView):
     model = Subjects   
@@ -131,11 +123,12 @@ class PostListView(ListView):
 class PostCreateView(CreateView):
     model = Subjects
     template_name = 'PostSubject.html'   
-    fields= ['title', 'description','created_date']    
+    fields= ['title', 'description','author']    
 class PostUpdateView(UpdateView):
     model = Subjects
     template_name = 'PostSubject.html'   
-    fields= ['title', 'description','created_date']    
+    fields= ['title', 'description','author'] 
+    success_url = ('/')   
 class PostDeleteView(DeleteView):
     model = Subjects
     template_name = 'delete.html'
