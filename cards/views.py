@@ -123,11 +123,11 @@ class PostListView(ListView):
 class PostCreateView(CreateView):
     model = Subjects
     template_name = 'PostSubject.html'   
-    fields= ['title', 'description','author']    
+    fields= ['title', 'description','author', 'created_date']    
 class PostUpdateView(UpdateView):
     model = Subjects
     template_name = 'PostSubject.html'   
-    fields= ['title', 'description','author'] 
+    fields= ['title', 'description','author','created_date'] 
     success_url = ('/')   
 class PostDeleteView(DeleteView):
     model = Subjects
