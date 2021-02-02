@@ -3,7 +3,7 @@
 [Preston-Too](https://github.com/Preston-Too)
 
 ## Live Link
-* [here] ()
+* [here] (https://flash-flashcards.herokuapp.com)
 
 ## Description
  FlashCards is a project made to enable users to register and post their notes. Studying made easier by use of FlashCards to aid on memorization of important information.
@@ -51,7 +51,6 @@ Open the application on your browser 127.0.0.1:8000.
 * Django
 * Bootstrap
 * HTML / CSS
-* Postman for visual representation while building the api
 
 
 ## Known Bugs
